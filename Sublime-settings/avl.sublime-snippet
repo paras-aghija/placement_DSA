@@ -1,0 +1,268 @@
+<snippet>
+	<content><![CDATA[
+template<class T>
+struct node
+{
+    T data;
+    node* left;
+    node* right;
+    int height;
+};
+
+
+template<class T>
+T operator*(node<T> a){
+  return a.data;
+}
+
+
+template<class T>
+class AVL
+{
+    node<T> *root;
+
+    void makeEmpty(node<T> *t)
+    {
+        if(t == NULL)
+            return;
+        makeEmpty(t->left);
+        makeEmpty(t->right);
+        delete t;
+    }
+
+    node<T>* insert(T x, node<T> *t)
+    {
+        if(t == NULL)
+        {
+            t = new node<T>;
+            t->data = x;
+            t->height = 0;
+            t->left = t->right = NULL;
+        }
+        else if(x < t->data)
+        {
+            t->left = insert(x, t->left);
+            if(height(t->left) - height(t->right) == 2)
+            {
+                if(x < t->left->data)
+                    t = singleRightRotate(t);
+                else
+                    t = doubleRightRotate(t);
+            }
+        }
+        else if(x > t->data)
+        {
+            t->right = insert(x, t->right);
+            if(height(t->right) - height(t->left) == 2)
+            {
+                if(x > t->right->data)
+                    t = singleLeftRotate(t);
+                else
+                    t = doubleLeftRotate(t);
+            }
+        }
+
+        t->height = max(height(t->left), height(t->right))+1;
+        return t;
+    }
+
+    node<T>* singleRightRotate(node<T> *&t)
+    {
+        node<T> *u = t->left;
+        t->left = u->right;
+        u->right = t;
+        t->height = max(height(t->left), height(t->right))+1;
+        u->height = max(height(u->left), t->height)+1;
+        return u;
+    }
+
+    node<T>* singleLeftRotate(node<T> *&t)
+    {
+        node<T> *u = t->right;
+        t->right = u->left;
+        u->left = t;
+        t->height = max(height(t->left), height(t->right))+1;
+        u->height = max(height(t->right), t->height)+1 ;
+        return u;
+    }
+
+    node<T>* doubleLeftRotate(node<T> *&t)
+    {
+        t->right = singleRightRotate(t->right);
+        return singleLeftRotate(t);
+    }
+
+    node<T>* doubleRightRotate(node<T> *&t)
+    {
+        t->left = singleLeftRotate(t->left);
+        return singleRightRotate(t);
+    }
+
+    node<T>* findMin(node<T> *t)
+    {
+        if(t == NULL)
+            return NULL;
+        else if(t->left == NULL)
+            return t;
+        else
+            return findMin(t->left);
+    }
+
+    node<T>* findMax(node<T> *t)
+    {
+        if(t == NULL)
+            return NULL;
+        else if(t->right == NULL)
+            return t;
+        else
+            return findMax(t->right);
+    }
+
+    node<T>* remove(T x, node<T> *t)
+    {
+        node<T> *temp;
+
+        // Element not found
+        if(t == NULL)
+            return NULL;
+
+        // Searching for element
+        else if(x < t->data)
+            t->left = remove(x, t->left);
+        else if(x > t->data)
+            t->right = remove(x, t->right);
+
+        // Element found
+        // With 2 children
+        else if(t->left && t->right)
+        {
+            temp = findMin(t->right);
+            t->data = temp->data;
+            t->right = remove(t->data, t->right);
+        }
+        // With one or zero child
+        else
+        {
+            temp = t;
+            if(t->left == NULL)
+                t = t->right;
+            else if(t->right == NULL)
+                t = t->left;
+            delete temp;
+        }
+        if(t == NULL)
+            return t;
+
+        t->height = max(height(t->left), height(t->right))+1;
+
+        // If node is unbalanced
+        // If left node is deleted, right case
+        if(height(t->left) - height(t->right) == 2)
+        {
+            // right right case
+            if(height(t->left->left) - height(t->left->right) == 1)
+                return singleLeftRotate(t);
+            // right left case
+            else
+                return doubleLeftRotate(t);
+        }
+        // If right node is deleted, left case
+        else if(height(t->right) - height(t->left) == 2)
+        {
+            // left left case
+            if(height(t->right->right) - height(t->right->left) == 1)
+                return singleRightRotate(t);
+            // left right case
+            else
+                return doubleRightRotate(t);
+        }
+        return t;
+    }
+
+    int height(node<T> *t)
+    {
+        return (t == NULL ? -1 : t->height);
+    }
+
+    int getBalance(node<T> *t)
+    {
+        if(t == NULL)
+            return 0;
+        else
+            return height(t->left) - height(t->right);
+    }
+
+    void inorder(node<T> *t)
+    {
+        if(t == NULL)
+            return;
+        inorder(t->left);
+        cout << t->data << " ";
+        inorder(t->right);
+    }
+
+    node<T>* search(node<T> *root, T x)
+    {
+        if (root == NULL || root->data == x)
+          return root;
+        
+        if (root->data < x)
+          return search(root->right, x);
+    
+        return search(root->left, x);
+    }
+
+public:
+    AVL()
+    {
+        root = NULL;
+    }
+
+    node<T>* find(T x){
+      node<T> *ans = search(root, x);
+      return ans;
+    }
+
+    void insert(T x)
+    {
+        root = insert(x, root);
+    }
+
+    void remove(T x)
+    {
+        root = remove(x, root);
+    }
+
+    void display()
+    {
+        inorder(root);
+        cout << endl;
+    }
+
+    void clear(){
+      makeEmpty(root);
+    }
+
+    node<T>* getLeftMostNode(){
+      node<T> *temp = root;
+      while(temp->left!=NULL){
+        temp = temp->left;
+      }
+      return temp;
+    }
+
+    node<T>* getRightMostNode(){
+      node<T> *temp = root;
+      while(temp->right!=NULL){
+        temp = temp->right;
+      }
+      return temp;
+    }
+};
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>avl</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

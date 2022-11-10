@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+#define bit(x, i) 		(((x) >> (i)) & 1)
+#define setbits(x)		__builtin_popcountll(x)
+#define tzbits(x)		__builtin_clzll(x)
+#define lzbits(x)		__builtin_ctzll(x)
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>bitop</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

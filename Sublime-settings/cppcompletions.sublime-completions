@@ -1,0 +1,29 @@
+{
+    "scope": "source.c++, meta.block.c++, meta.function.c++",
+
+    "completions":
+    [   "lower_bound(${1:})",
+        "vector<${1:}>",
+        "set<${1:}>",
+        "map<${1:},${2:}>",
+        "unordered_map<${1:},${2:}>",
+        "w(t){${1:}}",
+        "deb(${1:})",
+        "first",
+        "second",
+        "make_pair(${1:})",
+        "cout.precision(8); cout<<fixed; ",
+        "cin>>", 
+        "cout<<${1:}<<'\n';",
+        "binary_search(${1:})",
+        "length()",
+        "size()",
+        "begin()",
+        "end()",
+        "greater<int>",
+        "cout<<",
+        "cin>>",
+        "pop(${1:})",
+        "pop_back(${1:})",
+    ]
+}

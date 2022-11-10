@@ -1,0 +1,11 @@
+<snippet>
+    <content><![CDATA[
+/*
+ID: parasag2
+TASK: ${1:}
+LANG: C++ 
+*/
+]]></content>
+  <tabTrigger>usaco</tabTrigger>
+  <source>source.c++</source>
+</snippet>

@@ -1,0 +1,11 @@
+{
+	"color_scheme": "Packages/Theme - Seti Monokai/scheme/Seti Monokai.tmTheme",
+	"font_size": 16,
+	"ignored_packages":
+	[
+		"CPP Competitive Programming Snippets",
+		"Vintage",
+	],
+	"theme": "Seti Monokai.sublime-theme",
+	"font_face": "Fira Code",
+}

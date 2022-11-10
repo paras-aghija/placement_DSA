@@ -1,0 +1,31 @@
+<snippet>
+	<content><![CDATA[
+inline int LCS(string A, string B)
+{
+	int n = A.length();
+	int m = B.length();
+	int dp[1001][1001];
+	for (int i = 0; i <= n; i++) dp[i][0] = 0;
+	for (int j = 0; j <= m; j++) dp[0][j] = 0;
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= m; j++)
+		{
+			if (A[i - 1] == B[j - 1])
+			{
+				dp[i][j] = dp[i - 1][j - 1] + 1;
+			}
+			else
+			{
+				dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
+			}
+		}
+	}
+	return dp[n][m];
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lcs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

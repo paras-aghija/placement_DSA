@@ -1,0 +1,13 @@
+11 7 2 5 
+11 7 2 0 5 
+4 11 7 2 0 5 1 
+Middle element is : 2
+Length of LL : 7
+Nth from end : 0
+1 5 0 2 7 11 4 
+4 11 7 2 0 5 1 
+No loop present
+1 5 0 2 7 11 4 
+4 11 7 2 0 5 1 
+4 11 7 0 5 1 
+11 7 0 5 1 

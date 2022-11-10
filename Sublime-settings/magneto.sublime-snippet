@@ -1,0 +1,62 @@
+<snippet>
+	<content><![CDATA[
+/*
+-> Written By: <-
+-----------------
+| M A G N E T O |
+-----------------
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define int 			long long
+#define FIO 			ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0)
+#define vi 				vector<int>
+#define vvi 			vector<vi>
+#define pii 			pair<int,int>
+#define ff 				first
+#define ss 				second
+#define sz(x)			((int)x.size())
+#define all(x)	 		x.begin(), x.end()
+#define bit(x, i) 		(((x) >> (i)) & 1)
+#define pi 				3.14159265358979323846
+#define pb 				push_back
+#define gcd(a,b) 		__gcd((a),(b))
+#define setbits(x)		__builtin_popcountll(x)
+#define w(t) 			int t; cin>>t; while(t--)
+#define fr(i,a,b) 		for (int i = (int)(a); i <= (int)(b); i++)
+#define frr(i,a,b) 		for (int i = (int)(a); i >= (int)(b); i--)
+#define fre(i,a) 		for(auto &i : a)
+#define deb(...) 		logger(#__VA_ARGS__, __VA_ARGS__)
+
+
+template<class ...Args>
+void logger(string vars, Args&&... values) {
+	cout << vars << " = ";
+	string delim = "";
+	(..., (cout << delim << values, delim = ", "));
+}
+
+
+const int MOD = 1e9 + 7;
+const int dx8[] = {0, 0, 1, 1, 1, -1, -1, -1};
+const int dy8[] = {1, -1, 0, 1, -1, 0, 1, -1};
+const int dx4[] = {0, 0, 1, -1};
+const int dy4[] = {1, -1, 0, 0};
+
+void solve(){
+	
+}
+
+signed main() {
+	FIO;
+	${1:}
+	return 0;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>magneto</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
